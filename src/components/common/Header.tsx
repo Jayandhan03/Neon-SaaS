@@ -73,7 +73,7 @@ export function Header() {
           Pricing
         </Link>
       </nav>
-      <Button>Get Started</Button>
+      <div className="w-[115px]"></div>
     </motion.header>
   );
 }

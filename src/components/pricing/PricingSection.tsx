@@ -149,12 +149,6 @@ export function PricingSection() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button
-                  className="w-full"
-                  variant={tier.popular ? "default" : "outline"}
-                >
-                  {tier.cta}
-                </Button>
               </CardFooter>
             </Card>
           ))}

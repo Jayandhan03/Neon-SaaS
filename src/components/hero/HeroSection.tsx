@@ -22,7 +22,7 @@ export function HeroSection() {
           .dark {
              --primary-rgb: 106 13 173;
           }
-          .bg-\[radial-gradient\(circle_at_center\,rgba\(var\(--primary-rgb\)\,0\.1\)_0\%\,transparent_50\%\)\] {
+          .bg-\\[radial-gradient\\(circle_at_center\\,rgba\\(var\\(--primary-rgb\\)\\,0\\.1\\)_0\\%\\,transparent_50\\%\\)\\] {
             background-image: radial-gradient(circle at center,rgba(var(--primary-rgb),0.2) 0%,transparent_40%);
           }
         `}</style>
@@ -55,11 +55,6 @@ export function HeroSection() {
           Unleash your creativity with our revolutionary platform. The future of
           SaaS is here. Stop building, start creating.
         </motion.p>
-        <motion.div variants={FADE_IN_ANIMATION_VARIANTS} className="mt-8">
-          <Button size="lg">
-            Start Your Free Trial <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </motion.div>
       </motion.div>
     </section>
   );
