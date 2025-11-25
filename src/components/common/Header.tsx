@@ -53,27 +53,49 @@ export function Header() {
         <Cpu className="h-8 w-8 text-primary" />
         <span className="text-xl font-bold">Neon SaaS</span>
       </Link>
+      
       <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
         <Link
-          href="#features"
+          href="/#features"
           className="text-foreground/80 hover:text-foreground transition-colors"
         >
           Features
         </Link>
         <Link
-          href="#workflow"
+          href="/#workflow"
           className="text-foreground/80 hover:text-foreground transition-colors"
         >
           Workflow
         </Link>
+        
         <Link
-          href="#pricing"
+          href="/reporter"
+          className="text-foreground/80 hover:text-foreground transition-colors"
+        >
+          Reporter
+        </Link>
+
+        {/* --- NEW VISUALIZER LINK --- */}
+        <Link
+          href="/visualizer"
+          className="text-foreground/80 hover:text-foreground transition-colors"
+        >
+          Visualizer
+        </Link>
+        {/* --------------------------- */}
+
+        <Link
+          href="/#pricing"
           className="text-foreground/80 hover:text-foreground transition-colors"
         >
           Pricing
         </Link>
       </nav>
-      <div className="w-[115px]"></div>
+
+      <div className="hidden md:flex items-center gap-2">
+        <Button variant="ghost">Login</Button>
+        <Button>Get Started</Button>
+      </div>
     </motion.header>
   );
 }
