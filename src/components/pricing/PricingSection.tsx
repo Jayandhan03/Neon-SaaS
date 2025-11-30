@@ -20,25 +20,14 @@ import { Label } from "@/components/ui/label";
 const pricingTiers = [
   {
     name: "Starter",
-    price: {
-      monthly: "$29",
-      yearly: "$290",
-    },
+    price: { monthly: "$29", yearly: "$290" },
     description: "For individuals and small teams.",
-    features: [
-      "10 Projects",
-      "Basic Analytics",
-      "48-hour support",
-      "1GB Storage",
-    ],
+    features: ["10 Projects", "Basic Analytics", "48-hour support", "1GB Storage"],
     cta: "Choose Starter",
   },
   {
     name: "Pro",
-    price: {
-      monthly: "$79",
-      yearly: "$790",
-    },
+    price: { monthly: "$79", yearly: "$790" },
     description: "For growing businesses.",
     features: [
       "Unlimited Projects",
@@ -48,14 +37,11 @@ const pricingTiers = [
       "API Access",
     ],
     cta: "Choose Pro",
-    popular: true,
+    highlighted: true, // Middle card soft highlight
   },
   {
     name: "Enterprise",
-    price: {
-      monthly: "Custom",
-      yearly: "Custom",
-    },
+    price: { monthly: "Custom", yearly: "Custom" },
     description: "For large-scale applications.",
     features: [
       "Everything in Pro",
@@ -71,88 +57,109 @@ export function PricingSection() {
   const [isYearly, setIsYearly] = useState(false);
 
   return (
-    <section id="pricing" className="py-20 sm:py-32">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Find the perfect plan
-          </h2>
-          <p className="mt-4 text-lg text-foreground/70">
-            Simple, transparent pricing that scales with you.
-          </p>
-        </div>
+    <section id="pricing" className="relative py-24 sm:py-40">
+      {/* Soft Aurora Glow */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(200,170,255,0.16),transparent_65%)]"></div>
 
-        <div className="flex justify-center items-center gap-4 mb-12">
-          <Label htmlFor="pricing-toggle">Monthly</Label>
-          <Switch
-            id="pricing-toggle"
-            checked={isYearly}
-            onCheckedChange={setIsYearly}
-          />
-          <Label htmlFor="pricing-toggle" className="flex items-center gap-2">
-            Yearly{" "}
-            <span className="text-xs font-semibold bg-accent text-accent-foreground px-2 py-0.5 rounded-full">
-              2 months free
-            </span>
-          </Label>
-        </div>
+      <div className="text-center mb-16">
+        <h2 className="text-gradient-primary text-4xl md:text-5xl font-bold">
+          Find the perfect plan
+        </h2>
+        <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          Transparent pricing designed to grow with your business.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {pricingTiers.map((tier) => (
+      {/* Billing Toggle */}
+      <div className="flex justify-center items-center gap-4 mb-16">
+        <Label htmlFor="pricing-toggle">Monthly</Label>
+
+        <Switch
+          id="pricing-toggle"
+          checked={isYearly}
+          onCheckedChange={setIsYearly}
+        />
+
+        <Label htmlFor="pricing-toggle" className="flex items-center gap-2">
+          Yearly{" "}
+          <span className="text-xs font-semibold bg-accent text-accent-foreground px-2 py-0.5 rounded-full">
+            2 months free
+          </span>
+        </Label>
+      </div>
+
+      {/* Pricing Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-5xl mx-auto px-4">
+        {pricingTiers.map((tier) => (
+          <motion.div
+            key={tier.name}
+            whileHover={{ scale: 1.03, y: -6 }}
+            transition={{ duration: 0.25 }}
+          >
             <Card
-              key={tier.name}
               className={cn(
-                "flex flex-col",
-                tier.popular
-                  ? "border-primary ring-2 ring-primary shadow-lg"
-                  : "border-border"
+                "flex flex-col h-full p-6 backdrop-blur-xl border rounded-2xl",
+                "bg-white/15 dark:bg-white/10 border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.12)]",
+                tier.highlighted &&
+                  "shadow-[0_12px_50px_rgba(150,120,255,0.32)] border-[hsl(260_80%_75%/0.6)]"
               )}
             >
-              {tier.popular && (
-                <div className="absolute top-0 -translate-y-1/2 w-full text-center">
-                  <span className="bg-primary text-primary-foreground px-4 py-1 text-sm font-semibold rounded-full">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              <CardHeader className="pt-12">
-                <CardTitle>{tier.name}</CardTitle>
-                <div className="flex items-baseline gap-2">
+              <CardHeader className="pt-6">
+                <CardTitle className="text-2xl font-semibold tracking-tight">
+                  {tier.name}
+                </CardTitle>
+
+                {/* Animated Price */}
+                <div className="flex items-baseline gap-2 mt-4">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={isYearly ? "yearly" : "monthly"}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-4xl font-bold"
+                      transition={{ duration: 0.25 }}
+                      className="text-5xl font-bold text-gradient-primary drop-shadow-sm"
                     >
                       {isYearly ? tier.price.yearly : tier.price.monthly}
                     </motion.span>
                   </AnimatePresence>
+
                   {tier.name !== "Enterprise" && (
                     <span className="text-sm text-foreground/60">
                       {isYearly ? "/ year" : "/ month"}
                     </span>
                   )}
                 </div>
-                <CardDescription>{tier.description}</CardDescription>
+
+                <CardDescription className="mt-3 text-foreground/70 leading-relaxed">
+                  {tier.description}
+                </CardDescription>
               </CardHeader>
-              <CardContent className="flex-1">
+
+              {/* Features */}
+              <CardContent className="flex-1 mt-6">
                 <ul className="space-y-3">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <Check className="h-4 w-4 text-primary" />
-                      <span>{feature}</span>
+                      <Check className="h-5 w-5 text-accent" />
+                      <span className="text-foreground/80">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter>
+
+              {/* CTA */}
+              <CardFooter className="mt-8">
+                <Button
+                  variant={tier.highlighted ? "aurora" : "soft"}
+                  className="w-full py-5 text-base font-semibold rounded-full"
+                >
+                  {tier.cta}
+                </Button>
               </CardFooter>
             </Card>
-          ))}
-        </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
