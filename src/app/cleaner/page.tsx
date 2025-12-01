@@ -104,7 +104,7 @@ export default function DataCleanerPage() {
     if (instructions) formData.append("instructions", instructions);
 
     try {
-      const uploadResponse = await fetch("/api/upload-and-clean", {
+      const uploadResponse = await fetch("/api/clean-data", {
         method: "POST",
         body: formData,
       });

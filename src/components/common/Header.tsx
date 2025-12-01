@@ -58,6 +58,8 @@ export function Header() {
           { href: "/#workflow", label: "Workflow" },
           { href: "/reporter", label: "Reporter" },
           { href: "/visualizer", label: "Visualizer" },
+          // --- ADDED CHAT AGENT LINK HERE ---
+          { href: "/chat", label: "Chat Agent" }, 
           { href: "/#pricing", label: "Pricing" },
         ].map((item) => (
           <Link

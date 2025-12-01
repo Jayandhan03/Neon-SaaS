@@ -1,76 +1,61 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageSquareText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function HeroSection() {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", damping: 20, stiffness: 120 },
-    },
-  };
-
   return (
-    <section className="relative w-full min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Aurora Pastel Background */}
-      <div className="absolute inset-0 -z-10 bg-hero" />
+    <section className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden">
 
-      {/* Soft Glow Layer */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,hsl(260_90%_88%_/_0.35),transparent_60%)]" />
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/hero-clouds.mp4" type="video/mp4" />
+      </video>
 
-      {/* Floating aurora highlights */}
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(255,255,255,0.12),transparent_70%)] blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-10 w-72 h-72 bg-[radial-gradient(circle,rgba(180,140,255,0.25),transparent_70%)] blur-2xl -z-10" />
+      {/* Overlay Gradient for iOS Look */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-white/10 dark:from-black/40 dark:to-black/10 backdrop-blur-[2px]" />
 
       {/* Content */}
       <motion.div
-        initial="hidden"
-        animate="show"
-        variants={{
-          show: {
-            transition: { staggerChildren: 0.18 },
-          },
-        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
         className="relative z-10 text-center px-4 max-w-3xl"
       >
-        {/* Glass Highlight Behind Heading */}
-        <div className="absolute inset-x-1/2 -top-10 h-40 w-[70%] -translate-x-1/2 bg-white/10 dark:bg-white/5 blur-3xl rounded-full" />
+        <h1 className="text-5xl md:text-7xl font-bold text-foreground drop-shadow-sm">
+          Superpowers,<br /> everywhere you work
+        </h1>
 
-        {/* Main Heading */}
-        <motion.h1
-          variants={fadeIn}
-          className="text-5xl md:text-7xl font-bold tracking-tight text-gradient-primary drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
-        >
-          Build the future of SaaS
-        </motion.h1>
+        <p className="mt-6 text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
+          Mail, Docs, and AI that works in every app and tab.
+        </p>
 
-        {/* Subtext */}
-        <motion.p
-          variants={fadeIn}
-          className="mt-6 max-w-2xl mx-auto text-lg text-foreground/80 leading-relaxed"
-        >
-          A pastel-aurora inspired platform designed to elevate your creativity.
-          Build faster, think clearer, and unleash stunning digital experiences.
-        </motion.p>
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* Primary Button */}
+          <Link href="/reporter">
+            <Button className="px-8 py-6 text-lg rounded-2xl btn-glow">
+              Get Superhuman <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
 
-        {/* CTA Buttons */}
-        <motion.div
-          variants={fadeIn}
-          className="flex items-center justify-center gap-4 mt-10"
-        >
-          <Button variant="aurora" size="lg" className="btn-glow px-8 py-6">
-            Get Started
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-
-          <Button variant="glass" size="lg" className="px-8 py-6">
-            Learn More
-          </Button>
-        </motion.div>
+          {/* Secondary Button - Chat with Data */}
+          <Link href="/chat">
+            <Button 
+              variant="outline" 
+              className="px-8 py-6 text-lg rounded-2xl border-2 border-foreground/10 bg-white/20 hover:bg-white/40 dark:bg-black/20 dark:hover:bg-black/40 backdrop-blur-md transition-all"
+            >
+              Chat with Data <MessageSquareText className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
       </motion.div>
     </section>
   );
